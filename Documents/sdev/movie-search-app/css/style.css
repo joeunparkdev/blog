@@ -1,0 +1,58 @@
+/* 기본 스타일링 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+.search-container {
+    margin-top: 20px;
+}
+
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#search-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #0056b3;
+}
+
+/* 영화 목록 스타일링 */
+#movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.movie-card {
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center; /* 이미지 중앙 정렬을 위해 추가 */
+}
+
+.movie-card img {
+    width: 100%; /* 이미지를 부모 요소에 맞게 확장 */
+    height: auto; /* 가로세로 비율 유지 */
+}
