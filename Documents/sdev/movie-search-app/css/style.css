@@ -1,4 +1,3 @@
-/* 기본 스타일링 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -37,7 +36,6 @@ h1 {
     background-color: #0056b3;
 }
 
-/* 영화 목록 스타일링 */
 #movie-list {
     display: flex;
     flex-wrap: wrap;
@@ -49,10 +47,10 @@ h1 {
     margin: 20px;
     border: 1px solid #ddd;
     padding: 10px;
-    text-align: center; /* 이미지 중앙 정렬을 위해 추가 */
+    text-align: center; 
 }
 
 .movie-card img {
-    width: 100%; /* 이미지를 부모 요소에 맞게 확장 */
-    height: auto; /* 가로세로 비율 유지 */
+    width: 100%; 
+    height: auto; 
 }
