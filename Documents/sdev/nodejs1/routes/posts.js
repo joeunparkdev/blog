@@ -23,7 +23,6 @@ router.post("/posts", async (req, res) => {
         title,
         content,
         password: hashPassword,
-        createdAt: new Date().toISOString(),
       });
       res.json({ message: '게시글을 생성하였습니다.', postId: newPost._id });
     } catch (error) {
@@ -41,6 +40,7 @@ router.get("/posts", async (req, res) => {
         postId: post._id,
         user: post.user,
         title: post.title,
+        content: post.content,
         createdAt: post.createdAt,
       };
     });
@@ -64,6 +64,7 @@ router.get("/posts/:_postId", async (req, res) => {
       postId: post._id,
       user: post.user,
       title: post.title,
+      content: post.content,
       createdAt: post.createdAt,
     };
 
@@ -76,10 +77,13 @@ router.get("/posts/:_postId", async (req, res) => {
 // 게시글 수정 API
 router.put("/posts/:_postId", async (req, res) => {
   const postId = req.params._postId;
-  const { user, password, title, content } = req.body;
+  const { password, title, content } = req.body;
+  if (!password || !title || !content) {
+    return res.status(400).json({ errorMessage: "데이터 형식이 올바르지 않습니다." });
+  }
 
   //게시글 존재 여부 및 비밀번호 확인
-  const existingPost = await Post.findById(postId);
+  const existingPost = await Comment.findById(postId);
   if (!existingPost) {
     return res.status(404).json({ errorMessage: "게시글을 찾을 수 없습니다." });
   }
@@ -91,7 +95,6 @@ router.put("/posts/:_postId", async (req, res) => {
     }
 
     //게시글 수정
-    existingPost.user = user;
     existingPost.title = title;
     existingPost.content = content;
 
