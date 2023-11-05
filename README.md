@@ -6,6 +6,7 @@ assi1
 만약 게시물/댓글이 존재하지 않거나, body에 필요한정보가 안들어오거나, 비밀번호가 다르거나, 혹은 네트워크/코드에 문제가있을때 에러가 발생합니다.
 예를들어, 게시물 수정 API는 postId를 URL의 파라미터(param)로 받아와서 특정 게시물을 식별하고 다음 요청의 본문(body)에는 수정할 내용을 담고 있다. 
 이렇게 게시물 수정에 필요한 정보는 대부분 본문(body)에 있으므로 postId가 URL에 있습니다.
+    
     ```
     router.put("/posts/:_postId", async (req, res) => {
     const postId = req.params._postId; // 게시물 ID
