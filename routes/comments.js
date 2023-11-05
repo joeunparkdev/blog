@@ -2,12 +2,17 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const Comment = require("../schemas/comment.js");
+const Post = require("../schemas/post.js");
 
 // 댓글 생성 API
 router.post("/posts/:_postId/comments", async (req, res) => {
     const { user, password, content } = req.body;
     const postId = req.params._postId;
-
+    // 게시물 존재 여부 확인
+    const existingPost = await Post.findById(postId);
+    if (!existingPost) {
+        return res.status(404).json({ errorMessage: "게시물을 찾을 수 없습니다." });
+    }
     if (!user || !password || !content) {
         return res.status(400).json({ errorMessage: "데이터 형식이 올바르지 않습니다." });
     }
@@ -24,8 +29,7 @@ router.post("/posts/:_postId/comments", async (req, res) => {
                 postId,
                 user,
                 content,
-                password:hashPassword,
-                createdAt: new Date().toISOString(),
+                password: hashPassword,
             });
             res.json({ message: '댓글을 생성하였습니다.', commentId: newComment._id });
         } catch (error) {
@@ -38,7 +42,7 @@ router.post("/posts/:_postId/comments", async (req, res) => {
 router.get("/posts/:_postId/comments", async (req, res) => {
     try {
         const postId = req.params._postId;
-        const comments = await Comment.find({ postId: postId });
+        const comments = await Comment.find({ postId: postId }).sort({ createdAt: -1 });
         const responseData = comments.map((comment) => {
             return {
                 commentId: comment._id,
@@ -72,9 +76,12 @@ router.get("/posts/:_postId/comments/:_commentId", async (req, res) => {
 router.put("/posts/:_postId/comments/:_commentId", async (req, res) => {
     const postId = req.params._postId;
     const commentId = req.params._commentId;
-    const { user, password, content } = req.body;
+    const { password, content } = req.body;
+    if (!password || !content) {
+        return res.status(400).json({ errorMessage: "데이터 형식이 올바르지 않습니다." });
+    }
 
-    // 댓글 존재 여부 및 비밀번호 확인
+    // 댓글 존재 여부 확인
     const existingComment = await Comment.findOne({ _id: commentId, postId: postId });
     if (!existingComment) {
         return res.status(404).json({ errorMessage: "댓글을 찾을 수 없습니다." });
@@ -86,7 +93,6 @@ router.put("/posts/:_postId/comments/:_commentId", async (req, res) => {
         }
 
         // 댓글 수정
-        existingComment.user = user;
         existingComment.content = content;
         try {
             await existingComment.save();
