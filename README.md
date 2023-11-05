@@ -7,22 +7,23 @@ assi1
 예를들어, 게시물 수정 API는 postId를 URL의 파라미터(param)로 받아와서 특정 게시물을 식별하고 다음 요청의 본문(body)에는 수정할 내용을 담고 있다. 
 이렇게 게시물 수정에 필요한 정보는 대부분 본문(body)에 있으므로 postId가 URL에 있습니다.
     
-    ```
+    
     router.put("/posts/:_postId", async (req, res) => {
     const postId = req.params._postId; // 게시물 ID
     const { user, password, title, content } = req.body; // 수정할 내용
     //...
     });
-    ```
+    
 게시물 삭제 API는 postId를 URL의 파라미터로 받아와서 특정 게시물을 식별합하고 비밀번호(password)는 요청의 본문(body)에 있어서 게시물을 삭제할 때 필요한 정보로 본문(body)를 사용합니다.
-    ```
+    
+   
     router.delete("/posts/:_postId", async (req, res) => {
     const postId = req.params._postId; // 게시물 ID
     const password = req.body.password; // 비밀번호
     // ...
     });
 
-    ```
+    
 2. HTTP Method의 대표적인 4가지는 `GET`, `POST`, `PUT`, `DELETE` 가있는데 각각 어떤 상황에서 사용하셨나요?
 Get은 게시물/댓글을 불러올때, Post는 새 게시물/댓글을 생성할때, Put은 수정 그리고 Delete는 삭제 할때 사용했습니다.
 
