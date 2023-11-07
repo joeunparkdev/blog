@@ -9,6 +9,7 @@
 3. **모듈 시스템**: 최신 JS 문법을 지원하는 **ES6** 모듈 시스템 또는 기본 **CommonJS** 모듈 시스템을 사용합니다.
 4. **데이터베이스**: [**MongoDB Cloud**](https://www.mongodb.com/products/platform/cloud)에서 대여한 대표적인 NoSQL인 **MongoDB Atlas**을 사용합니다.
 5. **ODM**: **MongoDB**의 데이터를 쉽게 읽고 쓰게 해주는 **[mongoose](https://mongoosejs.com/docs/guide.html) ODM**을 사용합니다.
+6. **Thunder Client**: **HTTP 메서드 요청**을 시도합니다.
    
 # 주요 기능
 1. 전체 게시글 목록 조회 API
@@ -24,7 +25,7 @@
     - API를 호출할 때 입력된 비밀번호를 비교하여 동일할 때만 글이 삭제되게 하기
 6. 전체 게시글 삭제 API
     - 모든 댓글 삭제하기
-8. 댓글 목록 조회
+8. 댓글 목록 조회 API
     - 조회하는 게시글에 작성된 모든 댓글을 목록 형식으로 볼 수 있도록 하기
     - 작성 날짜 기준으로 내림차순 정렬하기
 9. 댓글 작성 API
